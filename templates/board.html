@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boggle Game</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <section id="boggle">
+    <div class="container"> 
+        <h1>Find a Word</h1>
+
+        <table class="table-bordered">
+        <tbody>
+        {% for row in board %}
+        <tr>
+            {% for cell in row %}
+            <td class="text-center" style="WIDTH:50px">{{ cell }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>    
+        </table>
+
+        <p>High Score:
+            <b>{{ highscore }}</b>
+            in {{ nplays }} plays
+        </p>
+           <p>
+                Score: <b class="score">0</b>
+                Seconds Left: <b class="timer"></b>
+           </p>
+
+        <form method="POST" class="add-word"> <!--action=""  -->
+            Input letters:<input type="text" name="word" class="word" autofocus>
+            <button type="submit" class="submit">Submit</button>
+        </form>
+    
+            <p class="msg">
+            <!-- our JS will put messages here dynamically -->
+            </p>
+
+        <ul class="words">
+            <!-- our JS will words here as they score -->
+        </ul>
+    </div>  
+    </section>
+
+    <script src="http://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
+    <script src="/static/boggle.js"></script>
+    
+</body>
+
+</html>
