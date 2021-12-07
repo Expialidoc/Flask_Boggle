@@ -117,9 +117,9 @@ class Boggle():
             if self.find_from(board, word[1:], y - 1, x - 1, seen):
                 return True
 
-        if y < 4 and x < 4:
-            if self.find_from(board, word[1:], y + 1, x + 1, seen):
-                return True
+        # if y < 4 and x < 4:
+        #     if self.find_from(board, word[1:], y + 1, x + 1, seen):
+        #         return True
 
         if x > 0 and y < 4:
             if self.find_from(board, word[1:], y + 1, x - 1, seen):

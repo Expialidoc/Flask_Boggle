@@ -12,8 +12,9 @@ def show_board():
     board = boggle_game.make_board()
     session['board'] = board
     nplays = session.get("nplays", 0)
+    highscore = session.get("highscore",0)
 
-    return render_template("board.html", board = board, nplays=nplays)
+    return render_template("board.html", board = board, nplays=nplays, highscore=highscore)
 
 @app.route("/check-word")
 def check_word():
@@ -22,14 +23,13 @@ def check_word():
     board = session["board"]
     response = boggle_game.check_valid_word(board, word)
 
-    return jsonify({'result': response})
+    return jsonify({'result': response}) #jsonify since an AJAX request was made to server (boggle.js)
 
 @app.route("/post-score", methods=["POST"])
 def post_score():
     """Receive score, update nplays, update high score if appropriate."""
     score = request.json["score"]
-    #score = session.get("score")
-    print(score)
+    print(request.form,request.json)
     highscore = session.get("highscore", 0)
     print(highscore)
     nplays = session.get("nplays", 0)
@@ -37,5 +37,5 @@ def post_score():
     session['highscore'] = max(score, highscore)
     # import pdb
     # pdb.set_trace()
-    #return jsonify(highscore)
+    print(session['highscore'])
     return jsonify(brokeRecord=score > highscore)
